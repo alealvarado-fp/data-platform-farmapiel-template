@@ -1,0 +1,12 @@
+name: Deploy to Production
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Prueba de CI/CD
+      run: echo "El pipeline está listo para conectarse a GCP"
