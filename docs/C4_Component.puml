@@ -1,0 +1,19 @@
+@startuml ComponentDiagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container(api, "API Service", "Python/FastAPI", "Maneja la lógica de negocio") 
+ContainerDb(db, "Base de Datos", "BigQuery/GCS", "Almacena logs y datos") [cite: 1, 2]
+
+Container_Boundary(api_boundary, "API Service Components") {
+    Component(controller, "Data Controller", "FastAPI Router", "Expone los endpoints para el Usuario Final")
+    Component(validator, "Schema Validator", "Pydantic", "Valida la estructura de los datos entrantes")
+    Component(bq_client, "BigQuery Client", "GCP SDK", "Ejecuta consultas en dm_[dominio]_dev") 
+    Component(storage_client, "GCS Manager", "GCP SDK", "Gestiona archivos Parquet en landing zone") 
+}
+
+Rel(controller, validator, "Valida datos con")
+Rel(validator, bq_client, "Solicita persistencia")
+Rel(validator, storage_client, "Envia archivos")
+Rel(bq_client, db, "Query SQL", "gRPC")
+Rel(storage_client, db, "Upload/Download", "HTTPS")
+@enduml

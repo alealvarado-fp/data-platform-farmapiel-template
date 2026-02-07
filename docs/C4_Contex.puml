@@ -1,0 +1,14 @@
+@startuml NombreDelComponente
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Nivel 1: Contexto
+Person(user, "Usuario Final")
+System_Boundary(c1, "Tu Sistema") {
+    ' Nivel 2: Contenedores
+    Container(api, "API Service", "Python/FastAPI", "Maneja la lógica de negocio")
+    ContainerDb(db, "Base de Datos", "BigQuery/GCS", "Almacena logs y datos")
+}
+
+Rel(user, api, "Usa", "HTTPS")
+Rel(api, db, "Lee/Escribe", "JDBC")
+@enduml

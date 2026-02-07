@@ -23,4 +23,12 @@ Para garantizar la calidad y la continuidad operativa, trabajamos bajo un esquem
    * Idempotencia de los DAGs (cero duplicidad de datos).
 4. **Despliegue:** Una vez aprobado el PR, **Sistemas hará el Merge**. Nuestro CI/CD automatizado se encargará de desplegar tu código a producción.
 
-> ** Regla de Oro:** "Si no está en Git, no existe". Queda prohibido el uso de la consola de GCP para crear o modificar tablas y procesos productivos.
+5. **Documentación de Arquitectura (Obligatorio)** Para que un PR sea considerado para revisión, el desarrollador deberá incluir en la carpeta /docs los diagramas de arquitectura utilizando PlantUML + Librería C4.
+
+   **Requisito Mínimo:** Se deben entregar al menos dos capas de profundidad: 
+      * C4 Context (Nivel 1), y 
+      * C4 Container (Nivel 2).
+
+   **Objetivo:** Estos diagramas servirán como base para el diseño de las pruebas unitarias y de integración que se implementarán en el pipeline de calidad.
+
+**Regla de Oro:** "Si no está en Git, no existe". Queda prohibido el uso de la consola de GCP para crear o modificar tablas y procesos productivos.
